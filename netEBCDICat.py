@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
 
 #########################################################################
-#			     netEBCDICat  re-written for python3                    #
+#			     netEBCDICat  re-written for python3
 #########################################################################
-# Script to communicate with netcat on OMVS (z/OS IBM Mainframe UNIX)	#
-#                                                               	    #
-# Requirements: Python, netcat-omvs running on a mainframe      	    #
-# Created by: Soldier of Fortran (@mainframed767)               	    #
-# Usage: This script will listen for or connect to a z/OS OMVS       	#
-# mainframe netcat session and translate the data from       			#
-# ASCII to EBCDIC and back						                        #
-#                                                               	    #
-# Copyright GPL 2019                                             	    #
-#########################################################################
+# Script to communicate with netcat on OMVS (z/OS IBM Mainframe UNIX)
+#
+# Requirements: Python, netcat-omvs running on a mainframe
+# Created by: Soldier of Fortran (@mainframed767)
+# Usage: This script will listen for or connect to a z/OS OMVS
+# mainframe netcat session and translate the data from
+# UTF-8 to EBCDIC and back
+#
+# Copyright GPL 2019
 ###
 # # Lots of help from http://4thmouse.com/index.php/2008/02/22/netcat-clone-in-three-languages-part-ii-python/
 ###
