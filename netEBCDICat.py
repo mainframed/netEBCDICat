@@ -15,7 +15,7 @@
 ###
 # # Lots of help from http://4thmouse.com/index.php/2008/02/22/netcat-clone-in-three-languages-part-ii-python/
 ###
-
+# To access other code pages install https://pypi.org/project/ebcdic/
 
 from select import select
 import socket
@@ -71,8 +71,8 @@ Script to communicate with z/OS IBM Mainframe who only speak EBCDIC
                         action="store_const", 
                         dest="loglevel", 
                         const=logging.INFO)
-    parser.add_argument('-e', '--encoding', 
-                        help="EBCDIC code page to use, defaul is cp037", 
+    parser.add_argument('-c', '--codepage', 
+                        help="EBCDIC code page. To access all code pages install https://pypi.org/project/ebcdic/ (Default cp037)", 
                         default=default_encoding)
     listen_or_ip = parser.add_mutually_exclusive_group(required=True)
     listen_or_ip.add_argument('-l','--listen',
@@ -89,10 +89,10 @@ Script to communicate with z/OS IBM Mainframe who only speak EBCDIC
     args = parser.parse_args()	
 
     logging.basicConfig(level=args.loglevel, format='netEBCDICat:%(levelname)s:%(message)s')
-    logging.info("netEBCDICat Version {}".format(version))
+    logging.info("netEBCDICat version {}".format(version))
     logging.debug(args)
 
-    logging.info("EBCDIC Encoding: {}".format(default_encoding))
+    logging.info("EBCDIC code page: {}".format(args.codepage))
     
     try:
         if args.listen:
@@ -123,7 +123,7 @@ Script to communicate with z/OS IBM Mainframe who only speak EBCDIC
             data = MFsock.recv(size)
             while( len(data) > 0 ):
                 logging.debug("recv ({})\t {}".format(len(data), data.hex()))
-                print(data.decode(args.encoding), end = '',  flush=True)
+                print(data.decode(args.codepage), end = '',  flush=True)
                 data = MFsock.recv(size)
                 if( len(data) > 0 ):
                     break
@@ -137,8 +137,8 @@ Script to communicate with z/OS IBM Mainframe who only speak EBCDIC
             c = input()
             if(c == ''):
                 break
-            logging.debug("send ({})\t {}".format(len(c+' '), c.encode(args.encoding).hex()))
-            if(MFsock.sendall(c.encode(args.encoding)+b'\x15') != None):
+            logging.debug("send ({})\t {}".format(len(c+' '), c.encode(args.codepage).hex()))
+            if(MFsock.sendall(c.encode(args.codepage)+b'\x15') != None):
                 break   
 
 main()
